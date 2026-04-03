@@ -64,7 +64,7 @@ export default function InscriptionModal({
           standId: stand.id,
           standName: stand.name,
           creneau: creneau,
-          creneauLabel: creneauInfo.label,
+          creneauLabel: `${creneauInfo.label} (${creneauInfo.horaire})`,
         }),
       });
 
