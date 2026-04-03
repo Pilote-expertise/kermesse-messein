@@ -77,34 +77,46 @@ export async function createInscription(
 }
 
 export async function confirmInscription(token: string): Promise<boolean> {
-  // Rechercher la page avec ce token
-  const response = await getNotionClient().dataSources.query({
-    data_source_id: getDatabaseId(),
-    filter: {
-      property: "Token",
-      rich_text: {
-        equals: token,
-      },
-    },
-  });
+  try {
+    console.log("Recherche du token:", token);
 
-  if (response.results.length === 0) {
-    return false;
+    // Rechercher la page avec ce token
+    const response = await getNotionClient().dataSources.query({
+      data_source_id: getDatabaseId(),
+      filter: {
+        property: "Token",
+        rich_text: {
+          equals: token,
+        },
+      },
+    });
+
+    console.log("Résultats trouvés:", response.results.length);
+
+    if (response.results.length === 0) {
+      console.log("Aucune inscription trouvée avec ce token");
+      return false;
+    }
+
+    const page = response.results[0];
+    console.log("Page trouvée:", page.id);
+
+    // Mettre à jour le statut
+    await getNotionClient().pages.update({
+      page_id: page.id,
+      properties: {
+        "Statut": {
+          select: { name: "Confirmé" },
+        },
+      },
+    });
+
+    console.log("Statut mis à jour avec succès");
+    return true;
+  } catch (error) {
+    console.error("Erreur dans confirmInscription:", error);
+    throw error;
   }
-
-  const page = response.results[0];
-
-  // Mettre à jour le statut
-  await getNotionClient().pages.update({
-    page_id: page.id,
-    properties: {
-      "Statut": {
-        select: { name: "Confirmé" },
-      },
-    },
-  });
-
-  return true;
 }
 
 interface NotionPageProperties {
