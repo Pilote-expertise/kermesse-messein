@@ -24,7 +24,7 @@ export async function sendConfirmationEmail(
 
   try {
     await getResendClient().emails.send({
-      from: "Kermesse Messein <onboarding@resend.dev>",
+      from: "Kermesse Messein <noreply@pilote-expertise.fr>",
       to: data.email,
       subject: `Confirmez votre inscription - ${data.standName}`,
       html: `
@@ -87,9 +87,11 @@ export async function sendConfirmationEmail(
       `,
     });
 
+    console.log("Email envoyé avec succès à:", data.email);
     return true;
   } catch (error) {
     console.error("Erreur envoi email:", error);
+    console.error("Détails:", JSON.stringify(error, null, 2));
     return false;
   }
 }
