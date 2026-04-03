@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { Calendar, MapPin, Clock, Heart } from "lucide-react";
+import Countdown from "./Countdown";
 
 export default function Hero() {
   return (
@@ -62,6 +63,11 @@ export default function Hero() {
         <p className="text-xl sm:text-2xl text-gray-600 mb-4 font-medium">
           École Jean Rostand de Messein
         </p>
+
+        {/* Compteur */}
+        <div className="mb-8">
+          <Countdown />
+        </div>
 
         {/* Emojis animés */}
         <div className="flex justify-center gap-4 text-4xl mb-8">

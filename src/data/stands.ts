@@ -1,3 +1,9 @@
+// Configuration de l'événement
+export const eventConfig = {
+  date: "2026-06-12", // Format YYYY-MM-DD
+  name: "Kermesse 2026",
+};
+
 export interface Stand {
   id: string;
   name: string;
@@ -52,7 +58,7 @@ export const stands: Stand[] = [
     id: "jeux-eau",
     name: "Jeux d'Eau - Tir au Pistolet",
     description: "Rafraîchissez-vous en visant les cibles avec des pistolets à eau !",
-    icon: "💦",
+    icon: "🔫",
     color: "#06b6d4",
     bgGradient: "from-cyan-400 to-cyan-600",
     slots: { creneau1: { needed: 2, registered: 0 }, creneau2: { needed: 2, registered: 0 } }
@@ -165,11 +171,14 @@ export const animations = [
   }
 ];
 
-export const restauration = [
+export const restaurationManger = [
   { name: "Crêpes", icon: "🥞", price: "À définir" },
   { name: "Pop-corn", icon: "🍿", price: "À définir" },
   { name: "Barbe à papa", icon: "🍬", price: "À définir" },
   { name: "Mister Freeze", icon: "🧊", price: "À définir" },
+];
+
+export const restaurationBoire = [
   { name: "Bouteille d'eau (petite)", icon: "💧", price: "À définir" },
   { name: "Bouteille d'eau (grande)", icon: "💧", price: "À définir" },
   { name: "Soft / Sirop à l'eau", icon: "🥤", price: "À définir" },
