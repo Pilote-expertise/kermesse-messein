@@ -80,40 +80,66 @@ export async function confirmInscription(token: string): Promise<boolean> {
   try {
     console.log("Recherche du token:", token.substring(0, 10) + "...");
 
-    // Rechercher la page avec ce token - essayer databases.query
-    const client = getNotionClient();
+    const apiKey = process.env.NOTION_API_KEY;
     const databaseId = getDatabaseId();
 
-    // Utiliser l'API databases au lieu de dataSources
-    const response = await (client as any).databases.query({
-      database_id: databaseId,
-      filter: {
-        property: "Token",
-        rich_text: {
-          equals: token,
-        },
+    // Appel API direct pour la recherche
+    const searchResponse = await fetch(`https://api.notion.com/v1/databases/${databaseId}/query`, {
+      method: "POST",
+      headers: {
+        "Authorization": `Bearer ${apiKey}`,
+        "Content-Type": "application/json",
+        "Notion-Version": "2022-06-28",
       },
+      body: JSON.stringify({
+        filter: {
+          property: "Token",
+          rich_text: {
+            equals: token,
+          },
+        },
+      }),
     });
 
-    console.log("Résultats trouvés:", response.results.length);
+    if (!searchResponse.ok) {
+      const errorData = await searchResponse.json();
+      console.error("Erreur recherche Notion:", errorData);
+      throw new Error(`Notion API error: ${errorData.message}`);
+    }
 
-    if (response.results.length === 0) {
+    const searchData = await searchResponse.json();
+    console.log("Résultats trouvés:", searchData.results.length);
+
+    if (searchData.results.length === 0) {
       console.log("Aucune inscription trouvée avec ce token");
       return false;
     }
 
-    const page = response.results[0];
+    const page = searchData.results[0];
     console.log("Page trouvée:", page.id);
 
-    // Mettre à jour le statut
-    await client.pages.update({
-      page_id: page.id,
-      properties: {
-        "Statut": {
-          select: { name: "Confirmé" },
-        },
+    // Appel API direct pour la mise à jour
+    const updateResponse = await fetch(`https://api.notion.com/v1/pages/${page.id}`, {
+      method: "PATCH",
+      headers: {
+        "Authorization": `Bearer ${apiKey}`,
+        "Content-Type": "application/json",
+        "Notion-Version": "2022-06-28",
       },
+      body: JSON.stringify({
+        properties: {
+          "Statut": {
+            select: { name: "Confirmé" },
+          },
+        },
+      }),
     });
+
+    if (!updateResponse.ok) {
+      const errorData = await updateResponse.json();
+      console.error("Erreur mise à jour Notion:", errorData);
+      throw new Error(`Notion API error: ${errorData.message}`);
+    }
 
     console.log("Statut mis à jour avec succès");
     return true;
