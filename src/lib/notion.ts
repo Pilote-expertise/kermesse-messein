@@ -78,11 +78,15 @@ export async function createInscription(
 
 export async function confirmInscription(token: string): Promise<boolean> {
   try {
-    console.log("Recherche du token:", token);
+    console.log("Recherche du token:", token.substring(0, 10) + "...");
 
-    // Rechercher la page avec ce token
-    const response = await getNotionClient().dataSources.query({
-      data_source_id: getDatabaseId(),
+    // Rechercher la page avec ce token - essayer databases.query
+    const client = getNotionClient();
+    const databaseId = getDatabaseId();
+
+    // Utiliser l'API databases au lieu de dataSources
+    const response = await (client as any).databases.query({
+      database_id: databaseId,
       filter: {
         property: "Token",
         rich_text: {
@@ -102,7 +106,7 @@ export async function confirmInscription(token: string): Promise<boolean> {
     console.log("Page trouvée:", page.id);
 
     // Mettre à jour le statut
-    await getNotionClient().pages.update({
+    await client.pages.update({
       page_id: page.id,
       properties: {
         "Statut": {
@@ -163,8 +167,9 @@ export async function getConfirmedInscriptions(
     ? filterConditions[0]
     : { and: filterConditions };
 
-  const response = await getNotionClient().dataSources.query({
-    data_source_id: getDatabaseId(),
+  // Utiliser databases.query au lieu de dataSources.query
+  const response = await (getNotionClient() as any).databases.query({
+    database_id: getDatabaseId(),
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     filter: filter as any,
   });
