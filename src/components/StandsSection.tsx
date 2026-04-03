@@ -102,7 +102,7 @@ export default function StandsSection() {
         <div className="text-center mb-12">
           <span className="text-5xl mb-4 block">🎪</span>
           <h2 className="section-title text-3xl sm:text-4xl font-extrabold text-gray-800 mb-4">
-            Les Stands de la Kermesse
+            Les stands de la kermesse
           </h2>
           <p className="text-gray-600 max-w-2xl mx-auto mt-6">
             Découvrez tous les stands qui animeront cette belle journée et inscrivez-vous
@@ -128,10 +128,10 @@ export default function StandsSection() {
           </div>
         </div>
 
-        {/* Titre Stands de Jeux */}
+        {/* Titre stands de jeux */}
         <h3 className="text-2xl font-bold text-gray-800 mb-6 flex items-center gap-3">
           <span className="text-3xl">🎮</span>
-          Stands de Jeux
+          Stands de jeux
         </h3>
 
         {/* Grille des stands de jeux */}
@@ -141,10 +141,10 @@ export default function StandsSection() {
           ))}
         </div>
 
-        {/* Titre Stands Organisation */}
+        {/* Titre stands organisation */}
         <h3 className="text-2xl font-bold text-gray-800 mt-16 mb-6 flex items-center gap-3">
           <span className="text-3xl">🏪</span>
-          Stands Organisation
+          Stands organisation
         </h3>
 
         {/* Grille des stands organisation */}

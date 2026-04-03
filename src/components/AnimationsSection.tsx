@@ -16,7 +16,7 @@ export default function AnimationsSection() {
           <h2 className="text-4xl sm:text-5xl font-extrabold text-gray-800 mb-4">
             Animations{" "}
             <span className="bg-gradient-to-r from-amber-500 to-orange-500 bg-clip-text text-transparent">
-              Spéciales
+              spéciales
             </span>
           </h2>
           <p className="text-gray-600 text-lg max-w-2xl mx-auto">
@@ -62,7 +62,7 @@ export default function AnimationsSection() {
                     <Trophy className="w-6 h-6 text-white" />
                   </div>
                   <div>
-                    <h3 className="text-2xl sm:text-3xl font-extrabold text-gray-800">Grande Tombola</h3>
+                    <h3 className="text-2xl sm:text-3xl font-extrabold text-gray-800">Grande tombola</h3>
                     <p className="text-orange-500 font-semibold">Des dizaines de lots à gagner !</p>
                   </div>
                 </div>
@@ -134,7 +134,7 @@ export default function AnimationsSection() {
                     ⚖️
                   </div>
                   <div>
-                    <h3 className="text-2xl sm:text-3xl font-extrabold text-gray-800">Panier Garni</h3>
+                    <h3 className="text-2xl sm:text-3xl font-extrabold text-gray-800">Panier garni</h3>
                     <p className="text-green-600 font-semibold">Devinez son poids et gagnez-le !</p>
                   </div>
                 </div>

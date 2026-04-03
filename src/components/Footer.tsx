@@ -1,6 +1,6 @@
 "use client";
 
-import { Heart, Mail, MapPin } from "lucide-react";
+import { Heart, MapPin } from "lucide-react";
 
 export default function Footer() {
   return (
@@ -30,12 +30,6 @@ export default function Footer() {
               <li className="flex items-center gap-2 text-gray-400 text-sm">
                 <MapPin className="w-4 h-4 text-[#ff6b6b]" />
                 École Jean Rostand, Messein
-              </li>
-              <li className="flex items-center gap-2 text-gray-400 text-sm">
-                <Mail className="w-4 h-4 text-[#ff6b6b]" />
-                <a href="mailto:contact@ecole-messein.fr" className="hover:text-white transition-colors">
-                  contact@ecole-messein.fr
-                </a>
               </li>
             </ul>
           </div>

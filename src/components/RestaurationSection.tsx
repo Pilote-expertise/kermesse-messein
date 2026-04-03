@@ -10,7 +10,7 @@ export default function RestaurationSection() {
         <div className="text-center mb-12">
           <span className="text-5xl mb-4 block">🍿</span>
           <h2 className="section-title text-3xl sm:text-4xl font-extrabold text-gray-800 mb-4">
-            Restauration sur Place
+            Restauration sur place
           </h2>
           <p className="text-gray-600 max-w-2xl mx-auto mt-6">
             De quoi vous régaler tout au long de la soirée !

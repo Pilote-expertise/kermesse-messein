@@ -20,7 +20,7 @@ export interface Stand {
 export const stands: Stand[] = [
   {
     id: "peluches",
-    name: "Stand des Peluches",
+    name: "Stand des peluches",
     description: "Lancez les balles et gagnez de superbes peluches ! Un classique incontournable des kermesses.",
     icon: "🧸",
     color: "#ec4899",
@@ -38,7 +38,7 @@ export const stands: Stand[] = [
   },
   {
     id: "circuit-velo",
-    name: "Circuit Vélo & Trottinette",
+    name: "Circuit vélo & trottinette",
     description: "Parcours d'obstacles pour les petits cyclistes et trotteurs en herbe !",
     icon: "🚲",
     color: "#22c55e",
@@ -47,7 +47,7 @@ export const stands: Stand[] = [
   },
   {
     id: "peche-canards",
-    name: "Pêche aux Canards",
+    name: "Pêche aux canards",
     description: "Attrapez les petits canards qui flottent et découvrez votre lot !",
     icon: "🦆",
     color: "#3b82f6",
@@ -56,7 +56,7 @@ export const stands: Stand[] = [
   },
   {
     id: "jeux-eau",
-    name: "Jeux d'Eau - Tir au Pistolet",
+    name: "Jeux d'eau - tir au pistolet",
     description: "Rafraîchissez-vous en visant les cibles avec des pistolets à eau !",
     icon: "🔫",
     color: "#06b6d4",
@@ -65,7 +65,7 @@ export const stands: Stand[] = [
   },
   {
     id: "course-garcons-cafe",
-    name: "Course des Garçons de Café",
+    name: "Course des garçons de café",
     description: "Courez le plus vite possible sans renverser le plateau ! Équilibre et rapidité.",
     icon: "☕",
     color: "#78350f",
@@ -74,7 +74,7 @@ export const stands: Stand[] = [
   },
   {
     id: "maquillage",
-    name: "Maquillage & Tatouage",
+    name: "Maquillage & tatouage",
     description: "Transformez-vous en super-héros, princesse ou animal avec nos artistes !",
     icon: "🎨",
     color: "#a855f7",
@@ -83,7 +83,7 @@ export const stands: Stand[] = [
   },
   {
     id: "jardin-sucettes",
-    name: "Jardin des Sucettes",
+    name: "Jardin des sucettes",
     description: "Plantez votre main et cueillez une délicieuse sucette surprise !",
     icon: "🍭",
     color: "#ec4899",
@@ -127,7 +127,7 @@ export const standsOrganisation: Stand[] = [
   },
   {
     id: "distribution-cadeaux",
-    name: "Distribution des Cadeaux",
+    name: "Distribution des cadeaux",
     description: "Remise des lots aux enfants ayant terminé tous les stands de jeux.",
     icon: "🎁",
     color: "#dc2626",
@@ -145,7 +145,7 @@ export const standsOrganisation: Stand[] = [
   },
   {
     id: "crepes-barbapapa",
-    name: "Crêpes & Barbe à Papa",
+    name: "Crêpes & barbe à papa",
     description: "Préparation et vente de crêpes et barbes à papa pour régaler petits et grands !",
     icon: "🥞",
     color: "#d97706",
@@ -157,14 +157,14 @@ export const standsOrganisation: Stand[] = [
 export const animations = [
   {
     id: "tombola",
-    name: "Grande Tombola",
+    name: "Grande tombola",
     description: "De nombreux lots à gagner ! Tentez votre chance avec nos tickets.",
     icon: "🎟️",
     color: "#f59e0b"
   },
   {
     id: "panier-garni",
-    name: "Panier Garni",
+    name: "Panier garni",
     description: "Estimez le poids du panier garni. Le plus proche gagne le panier !",
     icon: "🧺",
     color: "#84cc16"
@@ -195,7 +195,7 @@ export const programme = [
   },
   {
     time: "18h30",
-    title: "Ouverture de la Kermesse",
+    title: "Ouverture de la kermesse",
     description: "Tous les stands ouvrent leurs portes !",
     icon: "🎪"
   },
@@ -207,13 +207,13 @@ export const programme = [
   },
   {
     time: "20h00",
-    title: "Fin des stands & Tirage",
-    description: "Tirage de la Tombola et du Panier Garni !",
+    title: "Fin des stands & tirage",
+    description: "Tirage de la tombola et du panier garni !",
     icon: "🏆"
   },
   {
     time: "Après le tirage",
-    title: "Repas Auberge Espagnole",
+    title: "Repas auberge espagnole",
     description: "Chacun apporte un plat à partager. N'oubliez pas vos couverts et assiettes !",
     icon: "🍽️"
   }

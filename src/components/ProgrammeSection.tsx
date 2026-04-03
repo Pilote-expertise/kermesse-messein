@@ -10,7 +10,7 @@ export default function ProgrammeSection() {
         <div className="text-center mb-12">
           <span className="text-5xl mb-4 block">📋</span>
           <h2 className="section-title text-3xl sm:text-4xl font-extrabold text-gray-800 mb-4">
-            Programme de l&apos;Événement
+            Programme de l&apos;événement
           </h2>
           <p className="text-gray-600 max-w-2xl mx-auto mt-6">
             Voici le déroulé prévu pour cette magnifique soirée de kermesse !
@@ -48,7 +48,7 @@ export default function ProgrammeSection() {
             <span className="text-4xl">🍽️</span>
             <div>
               <h3 className="text-xl font-bold text-gray-800 mb-2">
-                Repas &quot;Auberge Espagnole&quot;
+                Repas &quot;auberge espagnole&quot;
               </h3>
               <p className="text-gray-600 mb-3">
                 Le soir, nous partagerons un repas convivial où chacun apporte un plat à partager !
