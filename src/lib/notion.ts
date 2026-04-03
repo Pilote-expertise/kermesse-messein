@@ -160,55 +160,75 @@ export async function getConfirmedInscriptions(
   standId?: string,
   creneau?: string
 ): Promise<Array<{ nom: string; prenom: string; standId: string; creneau: string }>> {
-  // Construire le filtre dynamiquement
-  type PropertyFilter = {
-    property: string;
-    select?: { equals: string };
-    rich_text?: { equals: string };
-  };
+  try {
+    const apiKey = process.env.NOTION_API_KEY;
+    const databaseId = getDatabaseId();
 
-  const filterConditions: PropertyFilter[] = [
-    {
-      property: "Statut",
-      select: { equals: "Confirmé" },
-    },
-  ];
-
-  if (standId) {
-    filterConditions.push({
-      property: "Stand ID",
-      rich_text: { equals: standId },
-    });
-  }
-
-  if (creneau) {
-    filterConditions.push({
-      property: "Créneau ID",
-      rich_text: { equals: creneau },
-    });
-  }
-
-  // Utiliser un filtre simple si une seule condition, sinon utiliser "and"
-  const filter = filterConditions.length === 1
-    ? filterConditions[0]
-    : { and: filterConditions };
-
-  // Utiliser databases.query au lieu de dataSources.query
-  const response = await (getNotionClient() as any).databases.query({
-    database_id: getDatabaseId(),
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    filter: filter as any,
-  });
-
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  return response.results.map((page: any) => {
-    const properties = (page as unknown as { properties: NotionPageProperties }).properties;
-
-    return {
-      nom: properties["Nom"]?.rich_text?.[0]?.plain_text || "",
-      prenom: properties["Prénom"]?.title?.[0]?.plain_text || "",
-      standId: properties["Stand ID"]?.rich_text?.[0]?.plain_text || "",
-      creneau: properties["Créneau ID"]?.rich_text?.[0]?.plain_text || "",
+    // Construire le filtre dynamiquement
+    type PropertyFilter = {
+      property: string;
+      select?: { equals: string };
+      rich_text?: { equals: string };
     };
-  });
+
+    const filterConditions: PropertyFilter[] = [
+      {
+        property: "Statut",
+        select: { equals: "Confirmé" },
+      },
+    ];
+
+    if (standId) {
+      filterConditions.push({
+        property: "Stand ID",
+        rich_text: { equals: standId },
+      });
+    }
+
+    if (creneau) {
+      filterConditions.push({
+        property: "Créneau ID",
+        rich_text: { equals: creneau },
+      });
+    }
+
+    // Utiliser un filtre simple si une seule condition, sinon utiliser "and"
+    const filter = filterConditions.length === 1
+      ? filterConditions[0]
+      : { and: filterConditions };
+
+    // Appel API direct
+    const response = await fetch(`https://api.notion.com/v1/databases/${databaseId}/query`, {
+      method: "POST",
+      headers: {
+        "Authorization": `Bearer ${apiKey}`,
+        "Content-Type": "application/json",
+        "Notion-Version": "2022-06-28",
+      },
+      body: JSON.stringify({ filter }),
+    });
+
+    if (!response.ok) {
+      const error = await response.json();
+      console.error("Erreur récupération inscriptions:", error);
+      return [];
+    }
+
+    const data = await response.json();
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    return data.results.map((page: any) => {
+      const properties = page.properties;
+
+      return {
+        nom: properties["Nom"]?.rich_text?.[0]?.plain_text || "",
+        prenom: properties["Prénom"]?.title?.[0]?.plain_text || "",
+        standId: properties["Stand ID"]?.rich_text?.[0]?.plain_text || "",
+        creneau: properties["Créneau ID"]?.rich_text?.[0]?.plain_text || "",
+      };
+    });
+  } catch (error) {
+    console.error("Erreur getConfirmedInscriptions:", error);
+    return [];
+  }
 }
