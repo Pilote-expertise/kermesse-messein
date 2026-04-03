@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { programme } from "@/data/stands";
 
 export default function ProgrammeSection() {
@@ -69,6 +70,17 @@ export default function ProgrammeSection() {
               </ul>
             </div>
           </div>
+        </div>
+
+        {/* Image auberge espagnole */}
+        <div className="mt-10 rounded-2xl overflow-hidden shadow-xl">
+          <Image
+            src="/Repas type auberge espagnole.png"
+            alt="Repas type auberge espagnole"
+            width={1200}
+            height={800}
+            className="w-full h-auto object-cover"
+          />
         </div>
       </div>
     </section>
