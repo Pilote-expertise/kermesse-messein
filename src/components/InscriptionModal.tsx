@@ -8,7 +8,7 @@ interface InscriptionModalProps {
   stand: Stand;
   creneau: "creneau1" | "creneau2";
   onClose: () => void;
-  onSuccess: (standId: string, creneau: "creneau1" | "creneau2", prenom: string) => void;
+  onSuccess: (standId: string, creneau: "creneau1" | "creneau2", prenom: string, nom: string) => void;
 }
 
 const classes = [
@@ -29,6 +29,7 @@ export default function InscriptionModal({
   onSuccess,
 }: InscriptionModalProps) {
   const [formData, setFormData] = useState({
+    nom: "",
     prenom: "",
     email: "",
     role: "maman",
@@ -48,7 +49,7 @@ export default function InscriptionModal({
     setError(null);
 
     // Validation
-    if (!formData.prenom || !formData.email || !formData.prenomEnfant || !formData.classeEnfant) {
+    if (!formData.nom || !formData.prenom || !formData.email || !formData.prenomEnfant || !formData.classeEnfant) {
       setError("Veuillez remplir tous les champs obligatoires.");
       setIsSubmitting(false);
       return;
@@ -124,19 +125,34 @@ export default function InscriptionModal({
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="space-y-4">
-              {/* Prénom */}
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Votre prénom *
-                </label>
-                <input
-                  type="text"
-                  value={formData.prenom}
-                  onChange={(e) => setFormData({ ...formData, prenom: e.target.value })}
-                  className="form-input w-full px-4 py-2 rounded-lg"
-                  placeholder="Ex: Marie"
-                  required
-                />
+              {/* Nom et Prénom */}
+              <div className="grid grid-cols-2 gap-3">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Votre nom *
+                  </label>
+                  <input
+                    type="text"
+                    value={formData.nom}
+                    onChange={(e) => setFormData({ ...formData, nom: e.target.value })}
+                    className="form-input w-full px-4 py-2 rounded-lg"
+                    placeholder="Ex: Dupont"
+                    required
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Votre prénom *
+                  </label>
+                  <input
+                    type="text"
+                    value={formData.prenom}
+                    onChange={(e) => setFormData({ ...formData, prenom: e.target.value })}
+                    className="form-input w-full px-4 py-2 rounded-lg"
+                    placeholder="Ex: Marie"
+                    required
+                  />
+                </div>
               </div>
 
               {/* Email */}

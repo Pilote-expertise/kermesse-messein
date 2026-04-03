@@ -4,6 +4,7 @@ import { X, Users } from "lucide-react";
 import { Stand, creneaux } from "@/data/stands";
 
 export interface Inscription {
+  nom: string;
   prenom: string;
   standId: string;
   creneau: "creneau1" | "creneau2";
@@ -70,10 +71,10 @@ export default function InscritsModal({
                   className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg"
                 >
                   <span className="w-8 h-8 bg-gradient-to-br from-[#ff6b6b] to-[#ee5a5a] rounded-full flex items-center justify-center text-white font-bold text-sm">
-                    {inscrit.prenom.charAt(0).toUpperCase()}
+                    {inscrit.prenom.charAt(0).toUpperCase()}{inscrit.nom.charAt(0).toUpperCase()}
                   </span>
                   <span className="font-medium text-gray-800">
-                    {inscrit.prenom}
+                    {inscrit.prenom} {inscrit.nom}
                   </span>
                 </li>
               ))}

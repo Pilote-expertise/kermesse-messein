@@ -24,7 +24,7 @@ export async function sendConfirmationEmail(
 
   try {
     await getResendClient().emails.send({
-      from: "Kermesse Messein <noreply@resend.dev>",
+      from: "Kermesse Messein <onboarding@resend.dev>",
       to: data.email,
       subject: `Confirmez votre inscription - ${data.standName}`,
       html: `

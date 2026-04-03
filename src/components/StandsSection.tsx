@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { stands as initialStands, standsOrganisation as initialStandsOrga, Stand } from "@/data/stands";
 import StandCard from "./StandCard";
 import InscriptionModal from "./InscriptionModal";
@@ -10,6 +10,7 @@ export default function StandsSection() {
   const [stands, setStands] = useState<Stand[]>(initialStands);
   const [standsOrga, setStandsOrga] = useState<Stand[]>(initialStandsOrga);
   const [inscriptions, setInscriptions] = useState<Inscription[]>([]);
+  const [isLoadingInscriptions, setIsLoadingInscriptions] = useState(true);
   const [selectedStand, setSelectedStand] = useState<{
     stand: Stand;
     creneau: "creneau1" | "creneau2";
@@ -22,6 +23,70 @@ export default function StandsSection() {
   } | null>(null);
 
   const allStands = [...stands, ...standsOrga];
+
+  // Charger les inscriptions confirmées au démarrage
+  useEffect(() => {
+    async function fetchInscriptions() {
+      try {
+        const response = await fetch("/api/inscriptions");
+        if (response.ok) {
+          const data = await response.json();
+          setInscriptions(data.inscriptions || []);
+
+          // Mettre à jour le compteur des stands
+          const inscriptionsList = data.inscriptions || [];
+
+          // Compter les inscriptions par stand et créneau
+          const counts: Record<string, { creneau1: number; creneau2: number }> = {};
+          inscriptionsList.forEach((insc: Inscription) => {
+            if (!counts[insc.standId]) {
+              counts[insc.standId] = { creneau1: 0, creneau2: 0 };
+            }
+            counts[insc.standId][insc.creneau]++;
+          });
+
+          // Mettre à jour les stands
+          setStands((prev) =>
+            prev.map((s) => ({
+              ...s,
+              slots: {
+                creneau1: {
+                  ...s.slots.creneau1,
+                  registered: counts[s.id]?.creneau1 || 0,
+                },
+                creneau2: {
+                  ...s.slots.creneau2,
+                  registered: counts[s.id]?.creneau2 || 0,
+                },
+              },
+            }))
+          );
+
+          setStandsOrga((prev) =>
+            prev.map((s) => ({
+              ...s,
+              slots: {
+                creneau1: {
+                  ...s.slots.creneau1,
+                  registered: counts[s.id]?.creneau1 || 0,
+                },
+                creneau2: {
+                  ...s.slots.creneau2,
+                  registered: counts[s.id]?.creneau2 || 0,
+                },
+              },
+            }))
+          );
+        }
+      } catch (error) {
+        console.error("Erreur chargement inscriptions:", error);
+      } finally {
+        setIsLoadingInscriptions(false);
+      }
+    }
+
+    fetchInscriptions();
+  }, []);
 
   const handleRegister = (standId: string, creneau: "creneau1" | "creneau2") => {
     const stand = allStands.find((s) => s.id === standId);
@@ -63,9 +128,9 @@ export default function StandsSection() {
     );
   };
 
-  const handleInscriptionSuccess = (standId: string, creneau: "creneau1" | "creneau2", prenom: string) => {
+  const handleInscriptionSuccess = (standId: string, creneau: "creneau1" | "creneau2", prenom: string, nom: string) => {
     // Ajoute l'inscription à la liste
-    setInscriptions((prev) => [...prev, { prenom, standId, creneau }]);
+    setInscriptions((prev) => [...prev, { nom, prenom, standId, creneau }]);
 
     // Vérifie dans quelle liste se trouve le stand
     if (stands.find((s) => s.id === standId)) {

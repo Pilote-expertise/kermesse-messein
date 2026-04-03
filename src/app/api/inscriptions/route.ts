@@ -1,8 +1,21 @@
 import { NextRequest, NextResponse } from "next/server";
 import { inscriptionSchema } from "@/lib/validation";
-import { createInscription } from "@/lib/notion";
+import { createInscription, getConfirmedInscriptions } from "@/lib/notion";
 import { sendConfirmationEmail } from "@/lib/resend";
 import crypto from "crypto";
+
+export async function GET() {
+  try {
+    const inscriptions = await getConfirmedInscriptions();
+    return NextResponse.json({ inscriptions });
+  } catch (error) {
+    console.error("Erreur récupération inscriptions:", error);
+    return NextResponse.json(
+      { error: "Une erreur est survenue", inscriptions: [] },
+      { status: 500 }
+    );
+  }
+}
 
 export async function POST(request: NextRequest) {
   try {

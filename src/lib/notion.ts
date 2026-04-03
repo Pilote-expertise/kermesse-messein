@@ -31,6 +31,9 @@ export async function createInscription(
       "Prénom": {
         title: [{ text: { content: data.prenom } }],
       },
+      "Nom": {
+        rich_text: [{ text: { content: data.nom } }],
+      },
       "Email": {
         email: data.email,
       },
@@ -106,6 +109,7 @@ export async function confirmInscription(token: string): Promise<boolean> {
 
 interface NotionPageProperties {
   "Prénom": { title: Array<{ plain_text: string }> };
+  "Nom": { rich_text: Array<{ plain_text: string }> };
   "Stand ID": { rich_text: Array<{ plain_text: string }> };
   "Créneau ID": { rich_text: Array<{ plain_text: string }> };
 }
@@ -113,7 +117,7 @@ interface NotionPageProperties {
 export async function getConfirmedInscriptions(
   standId?: string,
   creneau?: string
-): Promise<Array<{ prenom: string; standId: string; creneau: string }>> {
+): Promise<Array<{ nom: string; prenom: string; standId: string; creneau: string }>> {
   // Construire le filtre dynamiquement
   type PropertyFilter = {
     property: string;
@@ -157,6 +161,7 @@ export async function getConfirmedInscriptions(
     const properties = (page as unknown as { properties: NotionPageProperties }).properties;
 
     return {
+      nom: properties["Nom"]?.rich_text?.[0]?.plain_text || "",
       prenom: properties["Prénom"]?.title?.[0]?.plain_text || "",
       standId: properties["Stand ID"]?.rich_text?.[0]?.plain_text || "",
       creneau: properties["Créneau ID"]?.rich_text?.[0]?.plain_text || "",

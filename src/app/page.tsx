@@ -13,8 +13,8 @@ export default function Home() {
     <main className="min-h-screen">
       <Header />
       <Hero />
-      <StandsSection />
       <InscriptionSection />
+      <StandsSection />
       <AnimationsSection />
       <ProgrammeSection />
       <RestaurationSection />
