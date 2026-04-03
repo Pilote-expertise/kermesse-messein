@@ -18,6 +18,12 @@ export const metadata: Metadata = {
   keywords: ["kermesse", "école", "Messein", "Jean Rostand", "fête", "2026"],
   authors: [{ name: "APE Ecole Jean Rostand Messein" }],
   manifest: "/manifest.json",
+  icons: {
+    icon: [
+      { url: "/icons/icon.svg", type: "image/svg+xml" },
+    ],
+    apple: "/icons/icon.svg",
+  },
   appleWebApp: {
     capable: true,
     statusBarStyle: "default",

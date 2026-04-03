@@ -4,15 +4,22 @@ import { useState } from "react";
 import { stands as initialStands, standsOrganisation as initialStandsOrga, Stand } from "@/data/stands";
 import StandCard from "./StandCard";
 import InscriptionModal from "./InscriptionModal";
+import InscritsModal, { Inscription } from "./InscritsModal";
 
 export default function StandsSection() {
   const [stands, setStands] = useState<Stand[]>(initialStands);
   const [standsOrga, setStandsOrga] = useState<Stand[]>(initialStandsOrga);
+  const [inscriptions, setInscriptions] = useState<Inscription[]>([]);
   const [selectedStand, setSelectedStand] = useState<{
     stand: Stand;
     creneau: "creneau1" | "creneau2";
   } | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isInscritsModalOpen, setIsInscritsModalOpen] = useState(false);
+  const [viewingStand, setViewingStand] = useState<{
+    stand: Stand;
+    creneau: "creneau1" | "creneau2";
+  } | null>(null);
 
   const allStands = [...stands, ...standsOrga];
 
@@ -21,6 +28,14 @@ export default function StandsSection() {
     if (stand) {
       setSelectedStand({ stand, creneau });
       setIsModalOpen(true);
+    }
+  };
+
+  const handleViewInscrits = (standId: string, creneau: "creneau1" | "creneau2") => {
+    const stand = allStands.find((s) => s.id === standId);
+    if (stand) {
+      setViewingStand({ stand, creneau });
+      setIsInscritsModalOpen(true);
     }
   };
 
@@ -48,7 +63,10 @@ export default function StandsSection() {
     );
   };
 
-  const handleInscriptionSuccess = (standId: string, creneau: "creneau1" | "creneau2") => {
+  const handleInscriptionSuccess = (standId: string, creneau: "creneau1" | "creneau2", prenom: string) => {
+    // Ajoute l'inscription à la liste
+    setInscriptions((prev) => [...prev, { prenom, standId, creneau }]);
+
     // Vérifie dans quelle liste se trouve le stand
     if (stands.find((s) => s.id === standId)) {
       updateStandList(setStands, standId, creneau);
@@ -137,7 +155,13 @@ export default function StandsSection() {
         {/* Grille des stands de jeux */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {sortedStands.map((stand) => (
-            <StandCard key={stand.id} stand={stand} onRegister={handleRegister} />
+            <StandCard
+              key={stand.id}
+              stand={stand}
+              inscriptions={inscriptions}
+              onRegister={handleRegister}
+              onViewInscrits={handleViewInscrits}
+            />
           ))}
         </div>
 
@@ -150,7 +174,13 @@ export default function StandsSection() {
         {/* Grille des stands organisation */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {sortedStandsOrga.map((stand) => (
-            <StandCard key={stand.id} stand={stand} onRegister={handleRegister} />
+            <StandCard
+              key={stand.id}
+              stand={stand}
+              inscriptions={inscriptions}
+              onRegister={handleRegister}
+              onViewInscrits={handleViewInscrits}
+            />
           ))}
         </div>
 
@@ -164,6 +194,19 @@ export default function StandsSection() {
               setSelectedStand(null);
             }}
             onSuccess={handleInscriptionSuccess}
+          />
+        )}
+
+        {/* Modal des inscrits */}
+        {isInscritsModalOpen && viewingStand && (
+          <InscritsModal
+            stand={viewingStand.stand}
+            creneau={viewingStand.creneau}
+            inscriptions={inscriptions}
+            onClose={() => {
+              setIsInscritsModalOpen(false);
+              setViewingStand(null);
+            }}
           />
         )}
       </div>

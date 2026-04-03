@@ -8,7 +8,7 @@ interface InscriptionModalProps {
   stand: Stand;
   creneau: "creneau1" | "creneau2";
   onClose: () => void;
-  onSuccess: (standId: string, creneau: "creneau1" | "creneau2") => void;
+  onSuccess: (standId: string, creneau: "creneau1" | "creneau2", prenom: string) => void;
 }
 
 const classes = [
@@ -67,7 +67,7 @@ export default function InscriptionModal({
 
       setIsSuccess(true);
       setTimeout(() => {
-        onSuccess(stand.id, creneau);
+        onSuccess(stand.id, creneau, formData.prenom);
       }, 2000);
     } catch {
       setError("Une erreur est survenue. Veuillez réessayer.");

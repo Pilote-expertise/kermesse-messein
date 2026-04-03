@@ -1,14 +1,17 @@
 "use client";
 
-import { Users, CheckCircle } from "lucide-react";
+import { Users, CheckCircle, Eye } from "lucide-react";
 import { Stand, creneaux } from "@/data/stands";
+import { Inscription } from "./InscritsModal";
 
 interface StandCardProps {
   stand: Stand;
+  inscriptions: Inscription[];
   onRegister: (standId: string, creneau: "creneau1" | "creneau2") => void;
+  onViewInscrits: (standId: string, creneau: "creneau1" | "creneau2") => void;
 }
 
-export default function StandCard({ stand, onRegister }: StandCardProps) {
+export default function StandCard({ stand, inscriptions, onRegister, onViewInscrits }: StandCardProps) {
   const getTotalNeeded = () => {
     return (
       stand.slots.creneau1.needed - stand.slots.creneau1.registered +
@@ -17,6 +20,12 @@ export default function StandCard({ stand, onRegister }: StandCardProps) {
   };
 
   const totalNeeded = getTotalNeeded();
+
+  const getInscritsCount = (creneauKey: "creneau1" | "creneau2") => {
+    return inscriptions.filter(
+      (i) => i.standId === stand.id && i.creneau === creneauKey
+    ).length;
+  };
 
   return (
     <div className="stand-card relative group">
@@ -42,6 +51,7 @@ export default function StandCard({ stand, onRegister }: StandCardProps) {
             const creneau = creneaux[creneauKey];
             const remaining = slot.needed - slot.registered;
             const isFull = remaining <= 0;
+            const inscritsCount = getInscritsCount(creneauKey);
 
             return (
               <div
@@ -52,10 +62,21 @@ export default function StandCard({ stand, onRegister }: StandCardProps) {
                     : "bg-gray-50 border-gray-200 hover:border-[#ff6b6b]"
                 }`}
               >
-                <div className="flex items-center justify-between">
-                  <div>
-                    <span className="font-semibold text-sm">{creneau.label}</span>
-                    <span className="text-xs text-gray-500 ml-2">({creneau.horaire})</span>
+                <div className="flex items-center justify-between flex-wrap gap-2">
+                  <div className="flex items-center gap-2">
+                    <div>
+                      <span className="font-semibold text-sm">{creneau.label}</span>
+                      <span className="text-xs text-gray-500 ml-2">({creneau.horaire})</span>
+                    </div>
+                    {inscritsCount > 0 && (
+                      <button
+                        onClick={() => onViewInscrits(stand.id, creneauKey)}
+                        className="flex items-center gap-1 px-2 py-1 bg-blue-100 text-blue-700 text-xs font-medium rounded-full hover:bg-blue-200 transition-colors"
+                      >
+                        <Eye className="w-3 h-3" />
+                        {inscritsCount}
+                      </button>
+                    )}
                   </div>
                   <div className="flex items-center gap-2">
                     {isFull ? (
