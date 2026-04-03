@@ -1,18 +1,4 @@
-import { Client } from "@notionhq/client";
 import { InscriptionData } from "./validation";
-
-// Initialisation lazy pour éviter les erreurs au build
-let notion: Client | null = null;
-
-function getNotionClient(): Client {
-  if (!notion) {
-    if (!process.env.NOTION_API_KEY) {
-      throw new Error("NOTION_API_KEY non configurée");
-    }
-    notion = new Client({ auth: process.env.NOTION_API_KEY });
-  }
-  return notion;
-}
 
 function getDatabaseId(): string {
   if (!process.env.NOTION_DATABASE_ID) {
@@ -25,55 +11,73 @@ export async function createInscription(
   data: InscriptionData,
   token: string
 ): Promise<string> {
-  const response = await getNotionClient().pages.create({
-    parent: { database_id: getDatabaseId() },
-    properties: {
-      "Prénom": {
-        title: [{ text: { content: data.prenom } }],
-      },
-      "Nom": {
-        rich_text: [{ text: { content: data.nom } }],
-      },
-      "Email": {
-        email: data.email,
-      },
-      "Rôle": {
-        select: { name: data.role },
-      },
-      "Prénom enfant": {
-        rich_text: [{ text: { content: data.prenomEnfant } }],
-      },
-      "Classe enfant": {
-        select: { name: data.classeEnfant },
-      },
-      "Stand": {
-        rich_text: [{ text: { content: data.standName } }],
-      },
-      "Stand ID": {
-        rich_text: [{ text: { content: data.standId } }],
-      },
-      "Créneau": {
-        select: { name: data.creneauLabel },
-      },
-      "Créneau ID": {
-        rich_text: [{ text: { content: data.creneau } }],
-      },
-      "Commentaire": {
-        rich_text: [{ text: { content: data.commentaire || "" } }],
-      },
-      "Statut": {
-        select: { name: "En attente" },
-      },
-      "Token": {
-        rich_text: [{ text: { content: token } }],
-      },
-      "Date inscription": {
-        date: { start: new Date().toISOString() },
-      },
+  const apiKey = process.env.NOTION_API_KEY;
+  const databaseId = getDatabaseId();
+
+  const response = await fetch("https://api.notion.com/v1/pages", {
+    method: "POST",
+    headers: {
+      "Authorization": `Bearer ${apiKey}`,
+      "Content-Type": "application/json",
+      "Notion-Version": "2022-06-28",
     },
+    body: JSON.stringify({
+      parent: { database_id: databaseId },
+      properties: {
+        "Prénom": {
+          title: [{ text: { content: data.prenom } }],
+        },
+        "Nom": {
+          rich_text: [{ text: { content: data.nom } }],
+        },
+        "Email": {
+          email: data.email,
+        },
+        "Rôle": {
+          select: { name: data.role },
+        },
+        "Prénom enfant": {
+          rich_text: [{ text: { content: data.prenomEnfant } }],
+        },
+        "Classe enfant": {
+          select: { name: data.classeEnfant },
+        },
+        "Stand": {
+          rich_text: [{ text: { content: data.standName } }],
+        },
+        "Stand ID": {
+          rich_text: [{ text: { content: data.standId } }],
+        },
+        "Créneau": {
+          select: { name: data.creneauLabel },
+        },
+        "Créneau ID": {
+          rich_text: [{ text: { content: data.creneau } }],
+        },
+        "Commentaire": {
+          rich_text: [{ text: { content: data.commentaire || "" } }],
+        },
+        "Statut": {
+          select: { name: "En attente" },
+        },
+        "Token": {
+          rich_text: [{ text: { content: token } }],
+        },
+        "Date inscription": {
+          date: { start: new Date().toISOString() },
+        },
+      },
+    }),
   });
 
-  return response.id;
+  if (!response.ok) {
+    const error = await response.json();
+    console.error("Erreur création inscription:", error);
+    throw new Error(`Notion API error: ${error.message}`);
+  }
+
+  const result = await response.json();
+  return result.id;
 }
 
 export async function confirmInscription(token: string): Promise<boolean> {
