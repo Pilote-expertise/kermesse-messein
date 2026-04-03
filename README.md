@@ -1,36 +1,133 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🎪 Kermesse 2026 - École Jean Rostand Messein
 
-## Getting Started
+Site web pour la kermesse de l'école Jean Rostand de Messein, prévu le **12 juin 2026**.
 
-First, run the development server:
+## ✨ Fonctionnalités
+
+- **Présentation des stands** avec indicateur de besoins en bénévoles
+- **Système d'inscription** pour les bénévoles (formulaire avec nom, email, enfant/classe)
+- **Programme de la journée** avec timeline
+- **Section restauration** avec les produits disponibles
+- **Animations spéciales** : Tombola et Panier Garni
+- **Espace pour le plan** de l'école avec emplacements des stands
+- **Design responsive** optimisé pour mobile (QR codes)
+- **PWA ready** : installable sur téléphone
+
+## 🚀 Déploiement sur Vercel
+
+1. Créez un compte sur [Vercel](https://vercel.com)
+2. Connectez votre repository GitHub
+3. Importez le projet
+4. Le déploiement se fait automatiquement !
+
+## 💻 Développement local
 
 ```bash
+# Installation des dépendances
+npm install
+
+# Lancement du serveur de développement
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+
+# Build de production
+npm run build
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Ouvrez [http://localhost:3000](http://localhost:3000) dans votre navigateur.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 📁 Structure du projet
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+src/
+├── app/
+│   ├── globals.css      # Styles globaux
+│   ├── layout.tsx       # Layout principal
+│   └── page.tsx         # Page d'accueil
+├── components/
+│   ├── Header.tsx       # Navigation
+│   ├── Hero.tsx         # Section héro
+│   ├── StandsSection.tsx    # Liste des stands
+│   ├── StandCard.tsx    # Carte individuelle
+│   ├── InscriptionModal.tsx # Modal d'inscription
+│   ├── InscriptionSection.tsx
+│   ├── AnimationsSection.tsx
+│   ├── ProgrammeSection.tsx
+│   ├── RestaurationSection.tsx
+│   ├── PlanSection.tsx
+│   └── Footer.tsx
+└── data/
+    └── stands.ts        # Données des stands
+```
 
-## Learn More
+## 🎨 Personnalisation
 
-To learn more about Next.js, take a look at the following resources:
+### Modifier les stands
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Éditez `src/data/stands.ts` pour :
+- Ajouter/supprimer des stands
+- Modifier les descriptions
+- Changer le nombre de bénévoles nécessaires
+- Ajuster les créneaux horaires
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Modifier les horaires
 
-## Deploy on Vercel
+Dans `src/data/stands.ts`, modifiez l'objet `creneaux` :
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```typescript
+export const creneaux = {
+  creneau1: {
+    id: "creneau1",
+    label: "Créneau 1",
+    horaire: "15h00 - 15h45",  // Mettez vos horaires ici
+  },
+  creneau2: {
+    id: "creneau2",
+    label: "Créneau 2",
+    horaire: "15h45 - 16h30",
+  }
+};
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Ajouter les photos
+
+1. Placez vos images dans `public/images/`
+2. Modifiez `PlanSection.tsx` pour afficher vos photos
+3. Ajoutez votre plan de l'école
+
+### Icônes PWA
+
+Générez les icônes PNG à partir de `public/icons/icon.svg` :
+- Utilisez [Real Favicon Generator](https://realfavicongenerator.net/)
+- Ou suivez les instructions dans `public/icons/README.md`
+
+## 🔧 Pour aller plus loin
+
+### Connecter le formulaire à une base de données
+
+Actuellement, le formulaire simule l'envoi. Pour le connecter :
+
+1. **Google Sheets** : Utilisez l'API Google Sheets
+2. **Notion** : Utilisez l'API Notion (MCP configuré)
+3. **Base de données** : Ajoutez Prisma + PostgreSQL/Supabase
+
+### Ajouter l'envoi d'emails
+
+1. Créez un compte [Resend](https://resend.com) ou [SendGrid](https://sendgrid.com)
+2. Ajoutez une API Route dans `src/app/api/inscription/route.ts`
+3. Envoyez un email de confirmation lors de l'inscription
+
+## 📱 QR Code
+
+Pour générer un QR code vers votre site :
+1. Déployez d'abord sur Vercel
+2. Utilisez [QR Code Generator](https://www.qr-code-generator.com/)
+3. Entrez l'URL de votre site
+4. Imprimez et affichez !
+
+## 📞 Support
+
+Pour toute question, contactez l'APE de l'école Jean Rostand.
+
+---
+
+Fait avec ❤️ pour les enfants de l'école Jean Rostand de Messein
