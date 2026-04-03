@@ -174,7 +174,8 @@ export async function getConfirmedInscriptions(
     filter: filter as any,
   });
 
-  return response.results.map((page) => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  return response.results.map((page: any) => {
     const properties = (page as unknown as { properties: NotionPageProperties }).properties;
 
     return {
