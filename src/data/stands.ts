@@ -34,7 +34,7 @@ export const stands: Stand[] = [
     icon: "🎯",
     color: "#f97316",
     bgGradient: "from-orange-400 to-orange-600",
-    slots: { creneau1: { needed: 2, registered: 0 }, creneau2: { needed: 2, registered: 0 } }
+    slots: { creneau1: { needed: 1, registered: 0 }, creneau2: { needed: 1, registered: 0 } }
   },
   {
     id: "circuit-velo",
@@ -43,7 +43,7 @@ export const stands: Stand[] = [
     icon: "🚲",
     color: "#22c55e",
     bgGradient: "from-green-400 to-green-600",
-    slots: { creneau1: { needed: 3, registered: 0 }, creneau2: { needed: 3, registered: 0 } }
+    slots: { creneau1: { needed: 1, registered: 0 }, creneau2: { needed: 1, registered: 0 } }
   },
   {
     id: "peche-canards",
@@ -52,7 +52,7 @@ export const stands: Stand[] = [
     icon: "🦆",
     color: "#3b82f6",
     bgGradient: "from-blue-400 to-blue-600",
-    slots: { creneau1: { needed: 2, registered: 0 }, creneau2: { needed: 2, registered: 0 } }
+    slots: { creneau1: { needed: 1, registered: 0 }, creneau2: { needed: 1, registered: 0 } }
   },
   {
     id: "jeux-eau",
@@ -61,7 +61,7 @@ export const stands: Stand[] = [
     icon: "🔫",
     color: "#06b6d4",
     bgGradient: "from-cyan-400 to-cyan-600",
-    slots: { creneau1: { needed: 2, registered: 0 }, creneau2: { needed: 2, registered: 0 } }
+    slots: { creneau1: { needed: 1, registered: 0 }, creneau2: { needed: 1, registered: 0 } }
   },
   {
     id: "course-garcons-cafe",
@@ -70,7 +70,7 @@ export const stands: Stand[] = [
     icon: "☕",
     color: "#78350f",
     bgGradient: "from-amber-600 to-amber-800",
-    slots: { creneau1: { needed: 2, registered: 0 }, creneau2: { needed: 2, registered: 0 } }
+    slots: { creneau1: { needed: 1, registered: 0 }, creneau2: { needed: 1, registered: 0 } }
   },
   {
     id: "maquillage",
@@ -97,7 +97,7 @@ export const stands: Stand[] = [
     icon: "🏰",
     color: "#eab308",
     bgGradient: "from-yellow-400 to-amber-500",
-    slots: { creneau1: { needed: 2, registered: 0 }, creneau2: { needed: 2, registered: 0 } }
+    slots: { creneau1: { needed: 1, registered: 0 }, creneau2: { needed: 1, registered: 0 } }
   }
 ];
 
@@ -132,7 +132,7 @@ export const standsOrganisation: Stand[] = [
     icon: "🎁",
     color: "#dc2626",
     bgGradient: "from-red-400 to-red-600",
-    slots: { creneau1: { needed: 2, registered: 0 }, creneau2: { needed: 2, registered: 0 } }
+    slots: { creneau1: { needed: 1, registered: 0 }, creneau2: { needed: 1, registered: 0 } }
   },
   {
     id: "buvette",
@@ -141,7 +141,7 @@ export const standsOrganisation: Stand[] = [
     icon: "🍹",
     color: "#0891b2",
     bgGradient: "from-cyan-500 to-cyan-700",
-    slots: { creneau1: { needed: 2, registered: 0 }, creneau2: { needed: 2, registered: 0 } }
+    slots: { creneau1: { needed: 3, registered: 0 }, creneau2: { needed: 3, registered: 0 } }
   },
   {
     id: "crepes-barbapapa",
@@ -150,7 +150,7 @@ export const standsOrganisation: Stand[] = [
     icon: "🥞",
     color: "#d97706",
     bgGradient: "from-amber-400 to-amber-600",
-    slots: { creneau1: { needed: 3, registered: 0 }, creneau2: { needed: 3, registered: 0 } }
+    slots: { creneau1: { needed: 2, registered: 0 }, creneau2: { needed: 2, registered: 0 } }
   },
 ];
 
