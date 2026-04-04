@@ -31,7 +31,7 @@ export default function InscriptionSection() {
             <div className="bg-white/10 backdrop-blur-sm rounded-xl p-5">
               <Users className="w-8 h-8 mx-auto mb-3" />
               <h3 className="font-bold mb-1">Travail d&apos;équipe</h3>
-              <p className="text-white/80 text-sm">2 à 3 personnes par stand</p>
+              <p className="text-white/80 text-sm">1 à 2 personnes par stand</p>
             </div>
             <div className="bg-white/10 backdrop-blur-sm rounded-xl p-5">
               <CheckCircle className="w-8 h-8 mx-auto mb-3" />
