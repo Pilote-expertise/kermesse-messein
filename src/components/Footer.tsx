@@ -70,6 +70,9 @@ export default function Footer() {
               Fait avec <Heart className="w-4 h-4 text-[#ff6b6b] fill-current" /> pour les enfants
             </p>
           </div>
+          <p className="text-gray-600 text-xs text-center mt-4">
+            Site créé par <a href="https://pilote-expertise.fr" target="_blank" rel="noopener noreferrer" className="hover:text-gray-400 transition-colors">Pilote Expertise</a>
+          </p>
         </div>
       </div>
     </footer>
