@@ -6,9 +6,9 @@ import { Stand, creneaux } from "@/data/stands";
 
 interface InscriptionModalProps {
   stand: Stand;
-  creneau: "creneau1" | "creneau2";
+  creneau: "creneau0" | "creneau1" | "creneau2";
   onClose: () => void;
-  onSuccess: (standId: string, creneau: "creneau1" | "creneau2", prenom: string, nom: string) => void;
+  onSuccess: (standId: string, creneau: "creneau0" | "creneau1" | "creneau2", prenom: string, nom: string) => void;
 }
 
 const classes = [

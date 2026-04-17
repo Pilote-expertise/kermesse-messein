@@ -12,6 +12,7 @@ export interface Stand {
   color: string;
   bgGradient: string;
   slots: {
+    creneau0?: { needed: number; registered: number };
     creneau1: { needed: number; registered: number };
     creneau2: { needed: number; registered: number };
   };
@@ -21,7 +22,7 @@ export const stands: Stand[] = [
   {
     id: "peluches",
     name: "Stand des peluches",
-    description: "Lancez les balles et gagnez de superbes peluches ! Un classique incontournable des kermesses.",
+    description: "Tirez une balle numérotée (type Motus) et repartez avec la peluche correspondante !",
     icon: "🧸",
     color: "#ec4899",
     bgGradient: "from-pink-400 to-pink-600",
@@ -93,7 +94,7 @@ export const stands: Stand[] = [
   {
     id: "fort-boyard",
     name: "Jeux Fort Boyard",
-    description: "Affrontez-vous sur le jeu des bâtonnets (1, 2 ou 3 - celui qui prend le dernier a perdu) et le jeu du verre flottant !",
+    description: "Jeu des bâtonnets et jeu du verre flottant. Qui sera le plus malin ?",
     icon: "🏰",
     color: "#eab308",
     bgGradient: "from-yellow-400 to-amber-500",
@@ -102,6 +103,11 @@ export const stands: Stand[] = [
 ];
 
 export const creneaux = {
+  creneau0: {
+    id: "creneau0",
+    label: "Avant spectacle",
+    horaire: "17h00 - 17h30",
+  },
   creneau1: {
     id: "creneau1",
     label: "Créneau 1",
@@ -123,7 +129,7 @@ export const standsOrganisation: Stand[] = [
     icon: "💰",
     color: "#16a34a",
     bgGradient: "from-green-500 to-green-700",
-    slots: { creneau1: { needed: 2, registered: 0 }, creneau2: { needed: 2, registered: 0 } }
+    slots: { creneau0: { needed: 2, registered: 0 }, creneau1: { needed: 2, registered: 0 }, creneau2: { needed: 2, registered: 0 } }
   },
   {
     id: "distribution-cadeaux",
@@ -137,7 +143,7 @@ export const standsOrganisation: Stand[] = [
   {
     id: "buvette",
     name: "Buvette",
-    description: "Service des boissons : eau, sirops, softs, bières et vins.",
+    description: "Service des boissons : eau, sirops, sodas, bières. Vin à confirmer.",
     icon: "🍹",
     color: "#0891b2",
     bgGradient: "from-cyan-500 to-cyan-700",
@@ -146,7 +152,7 @@ export const standsOrganisation: Stand[] = [
   {
     id: "crepes-barbapapa",
     name: "Crêpes & barbe à papa",
-    description: "Préparation et vente de crêpes et barbes à papa pour régaler petits et grands !",
+    description: "Crêpes déjà préparées : il suffit d'étaler le Nutella ! Barbe à papa également.",
     icon: "🥞",
     color: "#d97706",
     bgGradient: "from-amber-400 to-amber-600",
@@ -164,16 +170,16 @@ export const animations = [
   },
   {
     id: "panier-garni",
-    name: "Panier garni",
-    description: "Estimez le poids du panier garni. Le plus proche gagne le panier !",
-    icon: "🧺",
+    name: "Jeux de société à peser",
+    description: "Jeux de société offerts par Iello (Heillecourt). Estimez le poids pour gagner !",
+    icon: "🎲",
     color: "#84cc16"
   }
 ];
 
 export const restaurationManger = [
   { name: "Crêpes", icon: "🥞", price: "À définir" },
-  { name: "Pop-corn", icon: "🍿", price: "À définir" },
+  { name: "Pop-corn", icon: "🍿", price: "À confirmer" },
   { name: "Barbe à papa", icon: "🍬", price: "À définir" },
   { name: "Mister Freeze", icon: "🧊", price: "À définir" },
 ];
@@ -182,13 +188,14 @@ export const restaurationBoire = [
   { name: "Bouteille d'eau (petite)", icon: "💧", price: "À définir" },
   { name: "Bouteille d'eau (grande)", icon: "💧", price: "À définir" },
   { name: "Soft / Sirop à l'eau", icon: "🥤", price: "À définir" },
+  { name: "Sodas", icon: "🥤", price: "À définir" },
   { name: "Bière", icon: "🍺", price: "À définir" },
-  { name: "Vin", icon: "🍷", price: "À définir" },
+  { name: "Vin (bouteilles auberge espagnole)", icon: "🍷", price: "À confirmer" },
 ];
 
 export const programme = [
   {
-    time: "17h15",
+    time: "17h30",
     title: "Spectacle des enfants",
     description: "Danses et représentations de toutes les classes",
     icon: "💃"

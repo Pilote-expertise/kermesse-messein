@@ -7,12 +7,12 @@ export interface Inscription {
   nom: string;
   prenom: string;
   standId: string;
-  creneau: "creneau1" | "creneau2";
+  creneau: "creneau0" | "creneau1" | "creneau2";
 }
 
 interface InscritsModalProps {
   stand: Stand;
-  creneau: "creneau1" | "creneau2";
+  creneau: "creneau0" | "creneau1" | "creneau2";
   inscriptions: Inscription[];
   onClose: () => void;
 }

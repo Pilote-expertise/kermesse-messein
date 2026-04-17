@@ -19,7 +19,7 @@ export const inscriptionSchema = z.object({
   commentaire: z.string().optional(),
   standId: z.string(),
   standName: z.string(),
-  creneau: z.enum(["creneau1", "creneau2"]),
+  creneau: z.enum(["creneau0", "creneau1", "creneau2"]),
   creneauLabel: z.string(),
 });
 

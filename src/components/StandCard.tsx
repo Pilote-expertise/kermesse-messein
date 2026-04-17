@@ -7,21 +7,23 @@ import { Inscription } from "./InscritsModal";
 interface StandCardProps {
   stand: Stand;
   inscriptions: Inscription[];
-  onRegister: (standId: string, creneau: "creneau1" | "creneau2") => void;
-  onViewInscrits: (standId: string, creneau: "creneau1" | "creneau2") => void;
+  onRegister: (standId: string, creneau: "creneau0" | "creneau1" | "creneau2") => void;
+  onViewInscrits: (standId: string, creneau: "creneau0" | "creneau1" | "creneau2") => void;
 }
 
 export default function StandCard({ stand, inscriptions, onRegister, onViewInscrits }: StandCardProps) {
   const getTotalNeeded = () => {
-    return (
-      stand.slots.creneau1.needed - stand.slots.creneau1.registered +
-      stand.slots.creneau2.needed - stand.slots.creneau2.registered
-    );
+    let total = stand.slots.creneau1.needed - stand.slots.creneau1.registered +
+      stand.slots.creneau2.needed - stand.slots.creneau2.registered;
+    if (stand.slots.creneau0) {
+      total += stand.slots.creneau0.needed - stand.slots.creneau0.registered;
+    }
+    return total;
   };
 
   const totalNeeded = getTotalNeeded();
 
-  const getInscritsCount = (creneauKey: "creneau1" | "creneau2") => {
+  const getInscritsCount = (creneauKey: "creneau0" | "creneau1" | "creneau2") => {
     return inscriptions.filter(
       (i) => i.standId === stand.id && i.creneau === creneauKey
     ).length;
@@ -46,8 +48,11 @@ export default function StandCard({ stand, inscriptions, onRegister, onViewInscr
 
         {/* Créneaux */}
         <div className="space-y-3">
-          {(["creneau1", "creneau2"] as const).map((creneauKey) => {
-            const slot = stand.slots[creneauKey];
+          {(stand.slots.creneau0
+            ? (["creneau0", "creneau1", "creneau2"] as const)
+            : (["creneau1", "creneau2"] as const)
+          ).map((creneauKey) => {
+            const slot = stand.slots[creneauKey]!;
             const creneau = creneaux[creneauKey];
             const remaining = slot.needed - slot.registered;
             const isFull = remaining <= 0;

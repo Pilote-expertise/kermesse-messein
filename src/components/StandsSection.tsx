@@ -13,13 +13,13 @@ export default function StandsSection() {
   const [isLoadingInscriptions, setIsLoadingInscriptions] = useState(true);
   const [selectedStand, setSelectedStand] = useState<{
     stand: Stand;
-    creneau: "creneau1" | "creneau2";
+    creneau: "creneau0" | "creneau1" | "creneau2";
   } | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isInscritsModalOpen, setIsInscritsModalOpen] = useState(false);
   const [viewingStand, setViewingStand] = useState<{
     stand: Stand;
-    creneau: "creneau1" | "creneau2";
+    creneau: "creneau0" | "creneau1" | "creneau2";
   } | null>(null);
 
   const allStands = [...stands, ...standsOrga];
@@ -37,12 +37,12 @@ export default function StandsSection() {
           const inscriptionsList = data.inscriptions || [];
 
           // Compter les inscriptions par stand et créneau
-          const counts: Record<string, { creneau1: number; creneau2: number }> = {};
+          const counts: Record<string, { creneau0: number; creneau1: number; creneau2: number }> = {};
           inscriptionsList.forEach((insc: Inscription) => {
             if (!counts[insc.standId]) {
-              counts[insc.standId] = { creneau1: 0, creneau2: 0 };
+              counts[insc.standId] = { creneau0: 0, creneau1: 0, creneau2: 0 };
             }
-            counts[insc.standId][insc.creneau]++;
+            counts[insc.standId][insc.creneau as "creneau0" | "creneau1" | "creneau2"]++;
           });
 
           // Mettre à jour les stands
@@ -50,6 +50,12 @@ export default function StandsSection() {
             prev.map((s) => ({
               ...s,
               slots: {
+                ...(s.slots.creneau0 && {
+                  creneau0: {
+                    ...s.slots.creneau0,
+                    registered: counts[s.id]?.creneau0 || 0,
+                  },
+                }),
                 creneau1: {
                   ...s.slots.creneau1,
                   registered: counts[s.id]?.creneau1 || 0,
@@ -66,6 +72,12 @@ export default function StandsSection() {
             prev.map((s) => ({
               ...s,
               slots: {
+                ...(s.slots.creneau0 && {
+                  creneau0: {
+                    ...s.slots.creneau0,
+                    registered: counts[s.id]?.creneau0 || 0,
+                  },
+                }),
                 creneau1: {
                   ...s.slots.creneau1,
                   registered: counts[s.id]?.creneau1 || 0,
@@ -88,7 +100,7 @@ export default function StandsSection() {
     fetchInscriptions();
   }, []);
 
-  const handleRegister = (standId: string, creneau: "creneau1" | "creneau2") => {
+  const handleRegister = (standId: string, creneau: "creneau0" | "creneau1" | "creneau2") => {
     const stand = allStands.find((s) => s.id === standId);
     if (stand) {
       setSelectedStand({ stand, creneau });
@@ -96,7 +108,7 @@ export default function StandsSection() {
     }
   };
 
-  const handleViewInscrits = (standId: string, creneau: "creneau1" | "creneau2") => {
+  const handleViewInscrits = (standId: string, creneau: "creneau0" | "creneau1" | "creneau2") => {
     const stand = allStands.find((s) => s.id === standId);
     if (stand) {
       setViewingStand({ stand, creneau });
@@ -107,7 +119,7 @@ export default function StandsSection() {
   const updateStandList = (
     setter: React.Dispatch<React.SetStateAction<Stand[]>>,
     standId: string,
-    creneau: "creneau1" | "creneau2"
+    creneau: "creneau0" | "creneau1" | "creneau2"
   ) => {
     setter((prev) =>
       prev.map((s) => {
@@ -128,7 +140,7 @@ export default function StandsSection() {
     );
   };
 
-  const handleInscriptionSuccess = (standId: string, creneau: "creneau1" | "creneau2", prenom: string, nom: string) => {
+  const handleInscriptionSuccess = (standId: string, creneau: "creneau0" | "creneau1" | "creneau2", prenom: string, nom: string) => {
     // Ajoute l'inscription à la liste
     setInscriptions((prev) => [...prev, { nom, prenom, standId, creneau }]);
 
@@ -146,9 +158,11 @@ export default function StandsSection() {
   const sortByNeeds = (list: Stand[]) =>
     [...list].sort((a, b) => {
       const needsA =
+        (a.slots.creneau0 ? a.slots.creneau0.needed - a.slots.creneau0.registered : 0) +
         a.slots.creneau1.needed - a.slots.creneau1.registered +
         a.slots.creneau2.needed - a.slots.creneau2.registered;
       const needsB =
+        (b.slots.creneau0 ? b.slots.creneau0.needed - b.slots.creneau0.registered : 0) +
         b.slots.creneau1.needed - b.slots.creneau1.registered +
         b.slots.creneau2.needed - b.slots.creneau2.registered;
       return needsB - needsA;
@@ -161,18 +175,19 @@ export default function StandsSection() {
   const totalNeeded = allStands.reduce(
     (acc, s) =>
       acc +
+      (s.slots.creneau0 ? s.slots.creneau0.needed - s.slots.creneau0.registered : 0) +
       (s.slots.creneau1.needed - s.slots.creneau1.registered) +
       (s.slots.creneau2.needed - s.slots.creneau2.registered),
     0
   );
 
   const totalRegistered = allStands.reduce(
-    (acc, s) => acc + s.slots.creneau1.registered + s.slots.creneau2.registered,
+    (acc, s) => acc + (s.slots.creneau0?.registered || 0) + s.slots.creneau1.registered + s.slots.creneau2.registered,
     0
   );
 
   const totalSlots = allStands.reduce(
-    (acc, s) => acc + s.slots.creneau1.needed + s.slots.creneau2.needed,
+    (acc, s) => acc + (s.slots.creneau0?.needed || 0) + s.slots.creneau1.needed + s.slots.creneau2.needed,
     0
   );
 
