@@ -124,13 +124,15 @@ export default function StandsSection() {
     setter((prev) =>
       prev.map((s) => {
         if (s.id === standId) {
+          const currentSlot = s.slots[creneau];
+          if (!currentSlot) return s;
           return {
             ...s,
             slots: {
               ...s.slots,
               [creneau]: {
-                ...s.slots[creneau],
-                registered: s.slots[creneau].registered + 1,
+                ...currentSlot,
+                registered: currentSlot.registered + 1,
               },
             },
           };
