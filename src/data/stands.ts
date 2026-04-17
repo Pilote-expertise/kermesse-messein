@@ -152,7 +152,7 @@ export const standsOrganisation: Stand[] = [
   {
     id: "crepes-barbapapa",
     name: "Crêpes & barbe à papa",
-    description: "Crêpes déjà préparées : il suffit d'étaler le Nutella ! Barbe à papa également.",
+    description: "Crêpes déjà préparées : il suffit d'étaler le Nutella ! Barbe à papa pour régaler petits et grands.",
     icon: "🥞",
     color: "#d97706",
     bgGradient: "from-amber-400 to-amber-600",
@@ -170,18 +170,18 @@ export const animations = [
   },
   {
     id: "panier-garni",
-    name: "Jeux de société à peser",
-    description: "Jeux de société offerts par Iello (Heillecourt). Estimez le poids pour gagner !",
-    icon: "🎲",
+    name: "Panier garni",
+    description: "Un magnifique panier rempli de jeux de société du partenaire Iello (fabricant d'Heillecourt). Estimez son poids au gramme près !",
+    icon: "🧺",
     color: "#84cc16"
   }
 ];
 
 export const restaurationManger = [
   { name: "Crêpes", icon: "🥞", price: "À définir" },
-  { name: "Pop-corn", icon: "🍿", price: "À confirmer" },
+  { name: "Pop-corn (à confirmer)", icon: "🍿", price: "À confirmer" },
   { name: "Barbe à papa", icon: "🍬", price: "À définir" },
-  { name: "Mister Freeze", icon: "🧊", price: "À définir" },
+  { name: "Mister Freeze (si le temps le permet)", icon: "🧊", price: "À définir" },
 ];
 
 export const restaurationBoire = [

@@ -5,8 +5,8 @@ import { Menu, X, Calendar, MapPin } from "lucide-react";
 
 const navItems = [
   { href: "#accueil", label: "Accueil" },
-  { href: "#stands", label: "Stands" },
   { href: "#inscription", label: "Inscription" },
+  { href: "#stands", label: "Stands" },
   { href: "#programme", label: "Programme" },
   { href: "#restauration", label: "Restauration" },
   { href: "#plan", label: "Plan" },
