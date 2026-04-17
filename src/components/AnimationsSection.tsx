@@ -106,15 +106,15 @@ export default function AnimationsSection() {
             <div className="relative bg-gradient-to-br from-lime-400 via-green-500 to-emerald-500 rounded-3xl overflow-hidden shadow-2xl">
               {/* Décorations */}
               <div className="absolute top-4 right-4 text-6xl animate-bounce">🧺</div>
-              <div className="absolute top-12 left-8 text-4xl animate-pulse">🍎</div>
-              <div className="absolute bottom-24 left-4 text-4xl animate-bounce" style={{ animationDelay: "0.3s" }}>🧀</div>
+              <div className="absolute top-12 left-8 text-4xl animate-pulse">🎲</div>
+              <div className="absolute bottom-24 left-4 text-4xl animate-bounce" style={{ animationDelay: "0.3s" }}>🃏</div>
 
               {/* Zone illustration */}
               <div className="h-48 sm:h-56 flex items-center justify-center relative">
                 <div className="text-center">
                   <div className="text-8xl sm:text-9xl mb-2 drop-shadow-lg">🧺</div>
                   <div className="flex justify-center gap-2">
-                    {["🍷", "🧀", "🥖", "🍫", "🍯"].map((emoji, i) => (
+                    {["🎲", "🃏", "🧩", "🎯", "🏆"].map((emoji, i) => (
                       <span
                         key={i}
                         className="text-2xl sm:text-3xl animate-bounce"
@@ -140,7 +140,7 @@ export default function AnimationsSection() {
                 </div>
 
                 <p className="text-gray-600 mb-6 text-lg">
-                  Un magnifique panier rempli de produits gourmands ! Estimez son poids au gramme près...
+                  Un magnifique panier rempli de jeux de société du partenaire Iello (fabricant d&apos;Heillecourt). Estimez son poids au gramme près !
                 </p>
 
                 <div className="bg-gradient-to-r from-lime-50 to-green-50 rounded-2xl p-5 border-2 border-lime-200">
