@@ -33,7 +33,6 @@ export default function RestaurationSection() {
                   {item.icon}
                 </span>
                 <h3 className="font-semibold text-gray-800 text-sm">{item.name}</h3>
-                <span className="text-xs text-gray-500 mt-1 block">{item.price}</span>
               </div>
             ))}
           </div>
@@ -62,9 +61,34 @@ export default function RestaurationSection() {
                   {item.icon}
                 </span>
                 <h3 className="font-semibold text-gray-800 text-sm">{item.name}</h3>
-                <span className="text-xs text-gray-500 mt-1 block">{item.price}</span>
               </div>
             ))}
+          </div>
+
+          {/* Info Éco-cups */}
+          <div className="mt-6 p-5 bg-gradient-to-br from-green-50 to-emerald-50 border-2 border-green-200 rounded-xl">
+            <h4 className="font-bold text-gray-800 mb-3 flex items-center gap-2">
+              <span className="text-2xl">♻️</span>
+              Éco-cups
+            </h4>
+            <ul className="space-y-2 text-gray-700 text-sm">
+              <li className="flex items-start gap-2">
+                <span className="text-green-500 mt-0.5">✓</span>
+                <span>Vous pouvez venir avec vos propres éco-cups</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-green-500 mt-0.5">✓</span>
+                <span>Des éco-cups seront également en vente sur place</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-amber-500 mt-0.5">ℹ</span>
+                <span>Pas de récupération de caution en fin d&apos;événement</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-pink-500 mt-0.5">♥</span>
+                <span>Vous pouvez les laisser sous forme de don pour soutenir les activités et sorties scolaires des enfants</span>
+              </li>
+            </ul>
           </div>
         </div>
 

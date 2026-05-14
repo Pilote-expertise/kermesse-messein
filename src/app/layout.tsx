@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Kermesse 2026 - Ecole Jean Rostand Messein",
-  description: "Rejoignez-nous le 12 juin 2026 pour la kermesse de l'école Jean Rostand de Messein ! Stands, jeux, tombola et convivialité au programme.",
+  description: "Rejoignez-nous le 12 juin 2026 pour la kermesse de l'école Jean Rostand de Messein ! Stands, jeux et convivialité au programme.",
   keywords: ["kermesse", "école", "Messein", "Jean Rostand", "fête", "2026"],
   authors: [{ name: "APE Ecole Jean Rostand Messein" }],
   manifest: "/manifest.json",

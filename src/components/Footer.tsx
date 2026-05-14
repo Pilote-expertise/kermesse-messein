@@ -43,7 +43,6 @@ export default function Footer() {
                 { href: "#inscription", label: "S'inscrire" },
                 { href: "#programme", label: "Programme" },
                 { href: "#restauration", label: "Restauration" },
-                { href: "#plan", label: "Plan" },
               ].map((link) => (
                 <li key={link.href}>
                   <a

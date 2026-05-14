@@ -119,6 +119,26 @@ export default function Hero() {
             <span className="font-bold text-[#a855f7]">activités</span> pour les enfants de l&apos;école !
           </p>
         </div>
+
+        {/* Alerte ticket obligatoire */}
+        <div className="mt-6 max-w-2xl mx-auto p-6 bg-gradient-to-r from-amber-100 to-orange-100 rounded-2xl border-2 border-amber-300 shadow-lg">
+          <div className="flex items-start gap-3">
+            <span className="text-3xl">🎟️</span>
+            <div className="text-left">
+              <h3 className="font-bold text-amber-800 text-lg mb-2">Ticket d&apos;entrée obligatoire</h3>
+              <p className="text-amber-900 text-sm">
+                Pour accéder à la kermesse, vous devez impérativement présenter votre <span className="font-bold">ticket d&apos;entrée</span>.
+                Celui-ci sera distribué par les maîtresses après avoir rempli la feuille de demande.
+              </p>
+              <p className="text-red-700 text-sm mt-2 font-bold">
+                🔄 Attention : les tickets ont changé et ne sont pas les mêmes que l&apos;année dernière !
+              </p>
+              <p className="text-amber-800 text-sm mt-2 font-semibold">
+                ⚠️ Sans ce ticket, l&apos;accès à l&apos;enceinte de l&apos;école ne sera pas autorisé.
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
 
       {/* Vague décorative */}

@@ -5,7 +5,6 @@ import InscriptionSection from "@/components/InscriptionSection";
 import AnimationsSection from "@/components/AnimationsSection";
 import ProgrammeSection from "@/components/ProgrammeSection";
 import RestaurationSection from "@/components/RestaurationSection";
-import PlanSection from "@/components/PlanSection";
 import Footer from "@/components/Footer";
 
 export default function Home() {
@@ -18,7 +17,6 @@ export default function Home() {
       <AnimationsSection />
       <ProgrammeSection />
       <RestaurationSection />
-      <PlanSection />
       <Footer />
     </main>
   );

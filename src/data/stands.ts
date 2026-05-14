@@ -162,13 +162,6 @@ export const standsOrganisation: Stand[] = [
 
 export const animations = [
   {
-    id: "tombola",
-    name: "Grande tombola",
-    description: "De nombreux lots à gagner ! Tentez votre chance avec nos tickets.",
-    icon: "🎟️",
-    color: "#f59e0b"
-  },
-  {
     id: "panier-garni",
     name: "Panier garni",
     description: "Un magnifique panier rempli de jeux de société du partenaire Iello (fabricant d'Heillecourt). Estimez son poids au gramme près !",
@@ -190,7 +183,7 @@ export const restaurationBoire = [
   { name: "Soft / Sirop à l'eau", icon: "🥤", price: "À définir" },
   { name: "Sodas", icon: "🥤", price: "À définir" },
   { name: "Bière", icon: "🍺", price: "À définir" },
-  { name: "Vin (bouteilles auberge espagnole)", icon: "🍷", price: "À confirmer" },
+  { name: "Bouteille de vin (pour le repas)", icon: "🍷", price: "À définir" },
 ];
 
 export const programme = [
@@ -215,7 +208,7 @@ export const programme = [
   {
     time: "20h00",
     title: "Fin des stands & tirage",
-    description: "Tirage de la tombola et du panier garni !",
+    description: "Annonce du gagnant du panier garni !",
     icon: "🏆"
   },
   {

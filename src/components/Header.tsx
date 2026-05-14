@@ -9,7 +9,6 @@ const navItems = [
   { href: "#stands", label: "Stands" },
   { href: "#programme", label: "Programme" },
   { href: "#restauration", label: "Restauration" },
-  { href: "#plan", label: "Plan" },
 ];
 
 export default function Header() {

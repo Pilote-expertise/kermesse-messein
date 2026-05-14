@@ -18,6 +18,31 @@ export default function ProgrammeSection() {
           </p>
         </div>
 
+        {/* Alerte fermeture portail */}
+        <div className="mb-12 p-6 bg-gradient-to-r from-red-50 to-orange-50 rounded-2xl border-2 border-red-300 shadow-lg">
+          <div className="flex items-start gap-4">
+            <span className="text-4xl">⚠️</span>
+            <div>
+              <h3 className="text-xl font-bold text-red-700 mb-3">
+                Information importante - Fermeture du portail à 17h30
+              </h3>
+              <p className="text-gray-700 mb-4">
+                Le portail menant à la kermesse et au spectacle sera <strong className="text-red-600">fermé à partir de 17h30</strong>.
+              </p>
+              <ul className="space-y-2">
+                <li className="flex items-start gap-2 text-sm text-gray-700">
+                  <span className="text-red-500 mt-0.5">🚗</span>
+                  <span><strong>Anticipez votre arrivée</strong> et prévoyez le temps de garer votre véhicule pour arriver avant la fermeture du portail.</span>
+                </li>
+                <li className="flex items-start gap-2 text-sm text-gray-700">
+                  <span className="text-green-500 mt-0.5">👧</span>
+                  <span><strong>Pour les enfants :</strong> ils pourront passer par la maternelle où ils seront accueillis et pris en charge par les professeurs de l&apos;école.</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
         {/* Timeline */}
         <div className="relative pl-8 border-l-4 border-gradient-to-b from-[#ff6b6b] to-[#4ecdc4]" style={{ borderImage: "linear-gradient(to bottom, #ff6b6b, #4ecdc4) 1" }}>
           {programme.map((item, index) => (
