@@ -133,6 +133,9 @@ export default function Hero() {
               <p className="text-red-700 text-sm mt-2 font-bold">
                 🔄 Attention : les tickets ont changé et ne sont pas les mêmes que l&apos;année dernière !
               </p>
+              <p className="text-red-700 text-sm mt-2 font-bold">
+                🚪 La grille sera fermée à 17h30 - Anticipez votre arrivée !
+              </p>
               <p className="text-amber-800 text-sm mt-2 font-semibold">
                 ⚠️ Sans ce ticket, l&apos;accès à l&apos;enceinte de l&apos;école ne sera pas autorisé.
               </p>
