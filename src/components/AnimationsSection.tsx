@@ -20,7 +20,7 @@ export default function AnimationsSection() {
             </span>
           </h2>
           <p className="text-gray-600 text-lg max-w-2xl mx-auto">
-            Le grand moment qui fera battre votre cœur !
+            Participez tout au long de la kermesse !
           </p>
         </div>
 
