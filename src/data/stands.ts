@@ -147,7 +147,7 @@ export const standsOrganisation: Stand[] = [
     icon: "🍹",
     color: "#0891b2",
     bgGradient: "from-cyan-500 to-cyan-700",
-    slots: { creneau1: { needed: 3, registered: 0 }, creneau2: { needed: 3, registered: 0 } }
+    slots: { creneau1: { needed: 4, registered: 0 }, creneau2: { needed: 3, registered: 0 } }
   },
   {
     id: "crepes-barbapapa",
