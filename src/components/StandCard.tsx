@@ -87,7 +87,7 @@ export default function StandCard({ stand, inscriptions, onRegister, onViewInscr
                     {isFull ? (
                       <span className="flex items-center gap-1 text-green-600 text-sm font-medium">
                         <CheckCircle className="w-4 h-4" />
-                        Complet
+                        Équipe complète
                       </span>
                     ) : (
                       <>
