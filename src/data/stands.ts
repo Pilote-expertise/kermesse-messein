@@ -26,7 +26,7 @@ export const stands: Stand[] = [
     icon: "🧸",
     color: "#ec4899",
     bgGradient: "from-pink-400 to-pink-600",
-    slots: { creneau1: { needed: 2, registered: 0 }, creneau2: { needed: 2, registered: 0 } }
+    slots: { creneau1: { needed: 3, registered: 0 }, creneau2: { needed: 2, registered: 0 } }
   },
   {
     id: "chamboule-tout",
